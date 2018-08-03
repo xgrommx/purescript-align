@@ -9,12 +9,22 @@ import Data.Bifunctor (class Bifunctor, bimap)
 import Data.Compactable (class Compactable, compact)
 import Data.Either (Either(..))
 import Data.Foldable (class Foldable)
+import Data.FunctorWithIndex (class FunctorWithIndex, mapWithIndex)
 import Data.Identity (Identity(..))
 import Data.Map as Map
 import Data.Maybe (Maybe(..))
 import Data.These (These(..), fromThese, mergeThese, these)
 import Data.Tuple (Tuple(..), uncurry)
 import Partial.Unsafe (unsafeCrashWith)
+
+class (FunctorWithIndex i f, Align f) <= AlignWithIndex i f | f -> i where
+  alignWithIndex :: forall a b c. (i -> These a b -> c) -> f a -> f b -> f c
+
+alignWithIndexDefault :: forall f i a b c. AlignWithIndex i f => (i -> These a b -> c) -> f a -> f b -> f c
+alignWithIndexDefault f a b = mapWithIndex f (align a b)
+
+instance alignWithIndexArray :: AlignWithIndex Int Array where
+  alignWithIndex f a b = alignWithIndexDefault f a b
 
 class Functor f <= Align f where
   nil :: forall a. f a
