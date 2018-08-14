@@ -10,7 +10,7 @@
     "purescript-prelude": "^4.1.0",
     "purescript-console": "^4.1.0",
     "purescript-effect": "^2.0.0",
-    "purescript-these": "xgrommx/purescript-these#d9d7662e142afa658bebf587ab9e92b1343d91bd"
+    "purescript-these": "xgrommx/purescript-these#648534612d0bc3fffebb880e50b8c23b5eab5c50"
   },
   "devDependencies": {
     "purescript-psci-support": "^4.0.0"
